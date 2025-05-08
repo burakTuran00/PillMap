@@ -20,7 +20,6 @@ public class MedicationGroup {
     private String description;
 
     @OneToMany(mappedBy = "medicationGroup")
-    @JsonManagedReference
     private List<Medication> medications;
 
     //region Constructors
@@ -34,7 +33,8 @@ public class MedicationGroup {
         this.description = description;
         this.medications = medications;
     }
-//endregion Properties
+
+    //endregion Properties
 
     //region Getters and Setters
 
@@ -69,5 +69,6 @@ public class MedicationGroup {
     public void setMedications(List<Medication> medications) {
         this.medications = medications;
     }
+
     //endregion Getters and Setters
 }

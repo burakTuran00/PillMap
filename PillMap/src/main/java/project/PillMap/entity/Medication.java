@@ -33,10 +33,17 @@ public class Medication {
     @Column(name = "prescription_required")
     private boolean prescriptionRequired;
 
+    @OneToOne
+    @JoinColumn(name = "prescription_detail_id")
+    private PrescriptionDetail prescriptionDetail;
+
     @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "group_id", referencedColumnName = "id")
+    @JoinColumn(name = "group_id")
     private MedicationGroup medicationGroup;
+
+    @OneToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 
 
     //endregion Properties
@@ -45,8 +52,8 @@ public class Medication {
 
     public Medication() {}
 
-    public Medication(int id, String name, String dosage, String form, String description,
-                      Double price, boolean prescriptionRequired, MedicationGroup medicationGroup) {
+    public Medication(int id, String name, String dosage, String form, String description, Double price,
+                      boolean prescriptionRequired, PrescriptionDetail prescriptionDetail, MedicationGroup medicationGroup, Stock stock) {
         this.id = id;
         this.name = name;
         this.dosage = dosage;
@@ -54,8 +61,11 @@ public class Medication {
         this.description = description;
         this.price = price;
         this.prescriptionRequired = prescriptionRequired;
+        this.prescriptionDetail = prescriptionDetail;
         this.medicationGroup = medicationGroup;
+        this.stock = stock;
     }
+
     //endregion Properties
 
     //region Getters and Setters
@@ -116,6 +126,14 @@ public class Medication {
         this.prescriptionRequired = prescriptionRequired;
     }
 
+    public PrescriptionDetail getPrescriptionDetail() {
+        return prescriptionDetail;
+    }
+
+    public void setPrescriptionDetail(PrescriptionDetail prescriptionDetail) {
+        this.prescriptionDetail = prescriptionDetail;
+    }
+
     public MedicationGroup getMedicationGroup() {
         return medicationGroup;
     }
@@ -123,6 +141,15 @@ public class Medication {
     public void setMedicationGroup(MedicationGroup medicationGroup) {
         this.medicationGroup = medicationGroup;
     }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+
 
     //endregion Getters and Setters
 }

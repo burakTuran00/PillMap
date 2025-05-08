@@ -33,7 +33,6 @@ public class Pharmacy {
     private boolean onDuty;
 
     @OneToMany(mappedBy = "pharmacy")
-    @JsonManagedReference
     private List<Stock> stocks;
 
     //region Constructors
@@ -41,8 +40,7 @@ public class Pharmacy {
     public Pharmacy() {
     }
 
-    public Pharmacy(int id, String name, String phone, String city, String subCity, String address,
-                    boolean onDuty, List<Stock> stocks) {
+    public Pharmacy(int id, String name, String phone, String city, String subCity, String address, boolean onDuty, List<Stock> stocks) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -120,5 +118,7 @@ public class Pharmacy {
     public void setStocks(List<Stock> stocks) {
         this.stocks = stocks;
     }
+
+
     //endregion Getters and Setters
 }

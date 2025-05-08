@@ -1,6 +1,5 @@
 package project.PillMap.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,15 +12,15 @@ public class PrescriptionDetail {
     private int id;
 
     @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "prescription_id", referencedColumnName = "id")
+    @JoinColumn(name = "prescription_id")
     private Prescription prescription;
 
     @OneToOne
-    @JoinColumn(name = "medication_id", referencedColumnName = "id")
+    @JoinColumn(name = "medication_id")
     private Medication medication;
 
     //region Constructors
+
     public PrescriptionDetail() {
     }
 
@@ -30,15 +29,26 @@ public class PrescriptionDetail {
         this.prescription = prescription;
         this.medication = medication;
     }
-    //endregion Constructors
+
+
+//endregion Constructors
 
     //region Getters And Setters
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
     }
 
     public Medication getMedication() {
@@ -49,12 +59,6 @@ public class PrescriptionDetail {
         this.medication = medication;
     }
 
-    public Prescription getPrescription() {
-        return prescription;
-    }
 
-    public void setPrescription(Prescription prescription) {
-        this.prescription = prescription;
-    }
     //endregion Getters And Setters
 }

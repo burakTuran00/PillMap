@@ -1,6 +1,6 @@
 package project.PillMap.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -16,8 +16,7 @@ public class Prescription {
     private int id;
 
     @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @Column(name = "isValid")
@@ -27,22 +26,25 @@ public class Prescription {
     private Date expireDate;
 
     @OneToMany(mappedBy = "prescription")
-    @JsonManagedReference
+    @JsonIgnore
     private List<PrescriptionDetail> prescriptionDetails;
 
     //region Constructors
     public Prescription() {
     }
 
-    public Prescription(int id, Patient patient, boolean isValid, Date expireDate) {
+    public Prescription(int id, Patient patient, boolean isValid, Date expireDate, List<PrescriptionDetail> prescriptionDetails) {
         this.id = id;
         this.patient = patient;
         this.isValid = isValid;
         this.expireDate = expireDate;
+        this.prescriptionDetails = prescriptionDetails;
     }
-    //endregion Constructors
+
+//endregion Constructors
 
     //region Getters And Setters
+
     public int getId() {
         return id;
     }
@@ -74,5 +76,14 @@ public class Prescription {
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
+
+    public List<PrescriptionDetail> getPrescriptionDetails() {
+        return prescriptionDetails;
+    }
+
+    public void setPrescriptionDetails(List<PrescriptionDetail> prescriptionDetails) {
+        this.prescriptionDetails = prescriptionDetails;
+    }
+
     //endregion Getters And Setters
 }

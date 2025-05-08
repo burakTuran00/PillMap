@@ -1,10 +1,14 @@
 package project.PillMap.dto;
 
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.*;
+import project.PillMap.entity.Prescription;
 
 import java.util.Date;
+import java.util.List;
 
 public class PatientDto {
+
+    private int id;
     private String name;
     private String surname;
     private Boolean gender;
@@ -14,14 +18,16 @@ public class PatientDto {
     private String address;
     private String city;
     private String subCity;
+    private List<PrescriptionDto> prescriptions;
 
     //region Constructor
 
     public PatientDto() {
     }
 
-    public PatientDto(String name, String surname, Boolean gender, Date birthDate,
-                      String phone, String mail, String address, String city, String subCity) {
+    public PatientDto(int id, String name, String surname, Boolean gender, Date birthDate, String phone,
+                      String mail, String address, String city, String subCity, List<PrescriptionDto> prescriptions) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -31,10 +37,20 @@ public class PatientDto {
         this.address = address;
         this.city = city;
         this.subCity = subCity;
+        this.prescriptions = prescriptions;
     }
+
     //endregion Constructor
 
-    //region Getters And Setters
+    //region Getters and Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -108,5 +124,13 @@ public class PatientDto {
         this.subCity = subCity;
     }
 
-    //endregion Getters And Setters
+    public List<PrescriptionDto> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<PrescriptionDto> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    //endregion Getters and Setters
 }

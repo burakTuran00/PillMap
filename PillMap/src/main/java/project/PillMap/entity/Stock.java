@@ -13,15 +13,14 @@ public class Stock {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "medication_id", referencedColumnName = "id")
+    @JoinColumn(name = "medication_id")
     private Medication medication;
 
     @Column(name = "quantity")
     private int quantity;
 
     @ManyToOne
-    @JsonManagedReference
-    @JoinColumn(name = "pharmacy_id", referencedColumnName = "id")
+    @JoinColumn(name = "pharmacy_id")
     private Pharmacy pharmacy;
 
     //region Constructors
@@ -29,12 +28,14 @@ public class Stock {
     public Stock() {
     }
 
-    public Stock(int id, Medication medication, int quantity) {
+    public Stock(int id, Medication medication, int quantity, Pharmacy pharmacy) {
         this.id = id;
         this.medication = medication;
         this.quantity = quantity;
+        this.pharmacy = pharmacy;
     }
-//endregion Properties
+
+    //endregion Properties
 
     //region Getters and Setters
 
@@ -60,6 +61,14 @@ public class Stock {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public Pharmacy getPharmacy() {
+        return pharmacy;
+    }
+
+    public void setPharmacy(Pharmacy pharmacy) {
+        this.pharmacy = pharmacy;
     }
 
 

@@ -1,11 +1,9 @@
 package project.PillMap.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Date;
 import java.util.List;
 
@@ -47,15 +45,17 @@ public class Patient {
     private String subCity;
 
     @OneToMany(mappedBy = "patient")
-    @JsonManagedReference
+    @JsonIgnore
     private List<Prescription> prescriptions;
+
     //endregion Properties
 
     //region Constructors
     public Patient() { }
 
-    public Patient(String name, String surname, Boolean gender, Date birthDate, String phone, String mail,
-                   String address, String city, String subCity) {
+    public Patient(int id, String name, String surname, Boolean gender, Date birthDate, String phone, String mail,
+                   String address, String city, String subCity, List<Prescription> prescriptions) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -65,10 +65,13 @@ public class Patient {
         this.address = address;
         this.city = city;
         this.subCity = subCity;
+        this.prescriptions = prescriptions;
     }
+
     //endregion Constructors
 
     //region Getters and Setters
+
     public int getId() {
         return id;
     }
@@ -148,5 +151,14 @@ public class Patient {
     public void setSubCity(String subCity) {
         this.subCity = subCity;
     }
-//endregion Constructors
+
+    public List<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    //endregion Constructors
 }
