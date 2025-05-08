@@ -1,46 +1,48 @@
-package project.PillMap.model;
+package project.PillMap.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "prescriptions")
 @Entity
+@Table(name = "prescriptions")
 public class Prescription {
-
-    //region Properties
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @OneToMany(mappedBy = "prescription")
-    private List<Patient> patient;
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    private Patient patient;
 
     @Column(name = "isValid")
-    private Boolean isValid;
+    private boolean isValid;
 
-    @Column(name = "expireDate")
+    @Column(name = "expire_date")
     private Date expireDate;
 
-    //endregion Properties
+    @OneToMany(mappedBy = "prescription")
+    @JsonManagedReference
+    private List<PrescriptionDetail> prescriptionDetails;
 
     //region Constructors
+    public Prescription() {
+    }
 
-    public Prescription() {}
-
-    public Prescription(int id, List<Patient> patient, Boolean isValid, Date expiteDate) {
+    public Prescription(int id, Patient patient, boolean isValid, Date expireDate) {
         this.id = id;
         this.patient = patient;
         this.isValid = isValid;
-        this.expireDate = expiteDate;
+        this.expireDate = expireDate;
     }
     //endregion Constructors
 
-    //region Getters and Setters
-
+    //region Getters And Setters
     public int getId() {
         return id;
     }
@@ -49,19 +51,19 @@ public class Prescription {
         this.id = id;
     }
 
-    public List<Patient> getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(List<Patient> patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
-    public Boolean getValid() {
+    public boolean isValid() {
         return isValid;
     }
 
-    public void setValid(Boolean valid) {
+    public void setValid(boolean valid) {
         isValid = valid;
     }
 
@@ -72,6 +74,5 @@ public class Prescription {
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }
-
-    //endregion Getters and Setter
+    //endregion Getters And Setters
 }

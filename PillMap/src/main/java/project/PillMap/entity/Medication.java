@@ -1,5 +1,6 @@
-package project.PillMap.model;
+package project.PillMap.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -26,27 +27,36 @@ public class Medication {
     @Column(name = "description")
     private String description;
 
-    @OneToOne
-    private Brand brand;
-
     @Column(name = "price")
-    private double price;
+    private Double price;
+
+    @Column(name = "prescription_required")
+    private boolean prescriptionRequired;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "group_id", referencedColumnName = "id")
+    private MedicationGroup medicationGroup;
+
+
     //endregion Properties
 
     //region Constructors
 
     public Medication() {}
 
-    public Medication(int id, String name, String dosage, String form, String description, Brand brand, double price) {
+    public Medication(int id, String name, String dosage, String form, String description,
+                      Double price, boolean prescriptionRequired, MedicationGroup medicationGroup) {
         this.id = id;
         this.name = name;
         this.dosage = dosage;
         this.form = form;
         this.description = description;
-        this.brand = brand;
         this.price = price;
+        this.prescriptionRequired = prescriptionRequired;
+        this.medicationGroup = medicationGroup;
     }
-//endregion Properties
+    //endregion Properties
 
     //region Getters and Setters
 
@@ -90,22 +100,29 @@ public class Medication {
         this.description = description;
     }
 
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
+    public boolean isPrescriptionRequired() {
+        return prescriptionRequired;
+    }
+
+    public void setPrescriptionRequired(boolean prescriptionRequired) {
+        this.prescriptionRequired = prescriptionRequired;
+    }
+
+    public MedicationGroup getMedicationGroup() {
+        return medicationGroup;
+    }
+
+    public void setMedicationGroup(MedicationGroup medicationGroup) {
+        this.medicationGroup = medicationGroup;
+    }
 
     //endregion Getters and Setters
 }

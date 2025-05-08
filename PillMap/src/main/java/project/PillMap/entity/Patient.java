@@ -1,8 +1,13 @@
-package project.PillMap.model;
+package project.PillMap.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "patients")
 @Entity
@@ -31,17 +36,35 @@ public class Patient {
 
     @Column(name = "mail")
     private String mail;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "subCity")
+    private String subCity;
+
+    @OneToMany(mappedBy = "patient")
+    @JsonManagedReference
+    private List<Prescription> prescriptions;
     //endregion Properties
 
     //region Constructors
     public Patient() { }
-    public Patient(String name, String surname, Boolean gender, Date birthDate, String phone, String mail) {
+
+    public Patient(String name, String surname, Boolean gender, Date birthDate, String phone, String mail,
+                   String address, String city, String subCity) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
         this.birthDate = birthDate;
         this.phone = phone;
         this.mail = mail;
+        this.address = address;
+        this.city = city;
+        this.subCity = subCity;
     }
     //endregion Constructors
 
@@ -102,5 +125,28 @@ public class Patient {
         this.mail = mail;
     }
 
-    //endregion Constructors
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getSubCity() {
+        return subCity;
+    }
+
+    public void setSubCity(String subCity) {
+        this.subCity = subCity;
+    }
+//endregion Constructors
 }
