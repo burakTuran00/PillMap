@@ -1,6 +1,9 @@
 package project.PillMap.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Lazy;
 
 @Entity
 @Table(name = "prescription_details")
@@ -13,10 +16,12 @@ public class PrescriptionDetail {
 
     @ManyToOne
     @JoinColumn(name = "prescription_id")
+    @JsonBackReference
     private Prescription prescription;
 
     @OneToOne
     @JoinColumn(name = "medication_id")
+    @JsonBackReference
     private Medication medication;
 
     //region Constructors

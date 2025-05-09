@@ -1,8 +1,5 @@
 package project.PillMap.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import project.PillMap.entity.Patient;
 import project.PillMap.entity.PrescriptionDetail;
 
 import java.util.Date;

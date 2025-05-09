@@ -24,4 +24,5 @@ public class PatientController {
     public ResponseEntity<List<PatientDto>> getAll(){
         return this.patientService.getAll();
     }
+
 }

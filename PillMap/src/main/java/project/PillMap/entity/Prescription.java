@@ -1,7 +1,11 @@
 package project.PillMap.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jdk.jfr.Label;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +21,7 @@ public class Prescription {
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
+    @JsonIgnore
     private Patient patient;
 
     @Column(name = "isValid")
@@ -26,7 +31,7 @@ public class Prescription {
     private Date expireDate;
 
     @OneToMany(mappedBy = "prescription")
-    @JsonIgnore
+    @JsonManagedReference
     private List<PrescriptionDetail> prescriptionDetails;
 
     //region Constructors
