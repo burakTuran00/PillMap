@@ -1,9 +1,7 @@
-package project.PillMap.entity;
+package project.PillMap.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-import java.util.Date;
 
 @Table(name = "medications")
 @Entity
@@ -35,14 +33,17 @@ public class Medication {
 
     @OneToOne
     @JoinColumn(name = "prescription_detail_id")
+    @JsonBackReference
     private PrescriptionDetail prescriptionDetail;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
+    @JsonBackReference
     private MedicationGroup medicationGroup;
 
     @OneToOne
     @JoinColumn(name = "stock_id")
+    @JsonBackReference
     private Stock stock;
 
 

@@ -5,6 +5,8 @@ public class PrescriptionDetailDto {
     private int prescriptionId;
     private int medicationId;
 
+    //region Constructor
+
     public PrescriptionDetailDto() {
     }
 
@@ -13,6 +15,10 @@ public class PrescriptionDetailDto {
         this.prescriptionId = prescriptionId;
         this.medicationId = medicationId;
     }
+
+    //endregion Constructor
+
+    //region Getters and Setters
 
     public int getId() {
         return id;
@@ -37,4 +43,6 @@ public class PrescriptionDetailDto {
     public void setMedicationId(int medicationId) {
         this.medicationId = medicationId;
     }
+
+    //endregion Getters and Setters
 }

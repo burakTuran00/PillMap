@@ -1,6 +1,5 @@
-package project.PillMap.entity;
+package project.PillMap.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;

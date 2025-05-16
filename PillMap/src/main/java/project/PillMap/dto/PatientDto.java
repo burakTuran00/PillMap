@@ -1,10 +1,6 @@
 package project.PillMap.dto;
 
-import jakarta.persistence.*;
-import project.PillMap.entity.Prescription;
-
 import java.util.Date;
-import java.util.List;
 
 public class PatientDto {
 
@@ -18,7 +14,6 @@ public class PatientDto {
     private String address;
     private String city;
     private String subCity;
-    private List<PrescriptionDto> prescriptions;
 
     //region Constructor
 
@@ -26,7 +21,7 @@ public class PatientDto {
     }
 
     public PatientDto(int id, String name, String surname, Boolean gender, Date birthDate, String phone,
-                      String mail, String address, String city, String subCity, List<PrescriptionDto> prescriptions) {
+                      String mail, String address, String city, String subCity) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -37,7 +32,6 @@ public class PatientDto {
         this.address = address;
         this.city = city;
         this.subCity = subCity;
-        this.prescriptions = prescriptions;
     }
 
     //endregion Constructor
@@ -122,14 +116,6 @@ public class PatientDto {
 
     public void setSubCity(String subCity) {
         this.subCity = subCity;
-    }
-
-    public List<PrescriptionDto> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(List<PrescriptionDto> prescriptions) {
-        this.prescriptions = prescriptions;
     }
 
     //endregion Getters and Setters

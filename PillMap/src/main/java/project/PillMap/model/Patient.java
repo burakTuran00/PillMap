@@ -1,10 +1,7 @@
-package project.PillMap.entity;
+package project.PillMap.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Lazy;
 
 import java.util.Date;
 import java.util.List;
