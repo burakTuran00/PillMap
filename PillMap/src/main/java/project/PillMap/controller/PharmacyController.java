@@ -64,7 +64,12 @@ public class PharmacyController {
     }
 
     @GetMapping("/getByAddress")
-    public ResponseEntity<List<PharmacyDto>> gegetByAddress(String address){
+    public ResponseEntity<List<PharmacyDto>> getByAddress(String address){
         return pharmacyService.getByAddress(address);
+    }
+
+    @GetMapping("/getByPatientAddress")
+    public ResponseEntity<List<PharmacyDto>> getByPatientAddress(String city, String subCity, String address){
+        return pharmacyService.getByPatientAddress(city, subCity, address);
     }
 }

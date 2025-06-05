@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import project.PillMap.Core.utility.mapper.ModelMapperService;
 import project.PillMap.dto.PrescriptionDetailDto;
+import project.PillMap.dto.PrescriptionDetailWithMedicationDto;
+import project.PillMap.dto.PrescriptionWithDetailDto;
 import project.PillMap.model.PrescriptionDetail;
 import project.PillMap.repository.PrescriptionDetailRepository;
 
@@ -45,6 +47,19 @@ public class PrescriptionDetailService {
         if(!prescriptionDetails.isEmpty()){
             for(PrescriptionDetail detail : prescriptionDetails){
                 results.add(modelMapperService.forResponse().map(detail,PrescriptionDetailDto.class));
+            }
+        }
+
+        return ResponseEntity.ok(results);
+    }
+
+    public ResponseEntity<List<PrescriptionDetailWithMedicationDto>> getPrescriptionWithDetail(int prescriptionId){
+        List<PrescriptionDetail> list = prescriptionDetailRepository.findAllByPrescriptionId(prescriptionId);
+        List<PrescriptionDetailWithMedicationDto> results = new ArrayList<>();
+
+        if(!list.isEmpty()){
+            for(PrescriptionDetail detail : list){
+                results.add(modelMapperService.forResponse().map(detail,PrescriptionDetailWithMedicationDto.class));
             }
         }
 

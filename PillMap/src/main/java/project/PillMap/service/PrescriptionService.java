@@ -59,4 +59,9 @@ public class PrescriptionService {
 
         return ResponseEntity.ok(results);
     }
+
+    public ResponseEntity<PrescriptionDto> getASpecificPrescriptionOfPatient(int patientId, int prescriptionId){
+        Prescription prescription = prescriptionRepository.findByPatientIdAndId(patientId, prescriptionId);
+        return ResponseEntity.ok(modelMapperService.forResponse().map(prescription,PrescriptionDto.class));
+    }
 }

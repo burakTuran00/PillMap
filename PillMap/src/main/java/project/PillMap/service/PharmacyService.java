@@ -149,4 +149,17 @@ public class PharmacyService {
 
         return ResponseEntity.ok(results);
     }
+
+    public ResponseEntity<List<PharmacyDto>> getByPatientAddress(String city, String subCity, String address) {
+        List<Pharmacy> pharmacies = pharmacyRepository.findByCityLikeAndSubCityLikeAndAddressLike(city, subCity, address);
+        List<PharmacyDto> results = new ArrayList<>();
+
+        if(!pharmacies.isEmpty()){
+            for(Pharmacy pharmacy : pharmacies){
+                results.add(modelMapperService.forResponse().map(pharmacy,PharmacyDto.class));
+            }
+        }
+
+        return ResponseEntity.ok(results);
+    }
 }
