@@ -1,8 +1,8 @@
 package project.PillMap.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import project.PillMap.dto.FindPharmacyRequestDto;
 import project.PillMap.dto.PharmacyDto;
 import project.PillMap.model.Pharmacy;
 import project.PillMap.service.EPharmacyService;
@@ -18,8 +18,8 @@ public class EPharmacyController {
         this.ePharmacyService = ePharmacyService;
     }
 
-    @GetMapping("/findPharmacies")
-    public List<PharmacyDto> findPharmacies(List<Integer> medicationIds){
-        return null ;
+    @PostMapping("/findPharmacy")
+    public ResponseEntity<List<PharmacyDto>> findPharmacy(@RequestBody FindPharmacyRequestDto requestDto){
+        return ePharmacyService.findPharmacy(requestDto);
     }
 }
