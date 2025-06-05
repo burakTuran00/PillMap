@@ -1,6 +1,7 @@
 package project.PillMap.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.Nullable;
 import project.PillMap.model.Pharmacy;
 
@@ -20,7 +21,6 @@ public interface PharmacyRepository extends JpaRepository<Pharmacy, Integer> {
 
     List<Pharmacy> findPharmaciesByCityAndOnDuty(String city, boolean onDuty);
     List<Pharmacy> findPharmaciesByAddressLike(String address);
-
 
     List<Pharmacy> findByCityLikeAndSubCityLikeAndAddressLike(String city, String subCity, @Nullable String address);
 }

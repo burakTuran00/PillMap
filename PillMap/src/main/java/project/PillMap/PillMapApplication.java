@@ -5,9 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import project.PillMap.model.Pharmacy;
 import project.PillMap.repository.MedicationRepository;
 import project.PillMap.repository.PharmacyRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 @SpringBootApplication
@@ -39,5 +42,11 @@ public class PillMapApplication {
 	@Bean
 	public MedicationRepository mRepo(){
 		return medicationRepository;
+	}
+
+	@Bean
+	public List<Pharmacy> someBean() {
+		List<Pharmacy> list = new ArrayList<>();
+		return list;
 	}
 }

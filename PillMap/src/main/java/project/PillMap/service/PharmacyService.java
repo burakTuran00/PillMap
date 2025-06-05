@@ -3,8 +3,11 @@ package project.PillMap.service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import project.PillMap.Core.utility.mapper.ModelMapperService;
+import project.PillMap.dto.FindPharmacyRequestDto;
 import project.PillMap.dto.PharmacyDto;
+import project.PillMap.model.Medication;
 import project.PillMap.model.Pharmacy;
+import project.PillMap.model.Stock;
 import project.PillMap.repository.PharmacyRepository;
 
 import java.util.ArrayList;
@@ -161,5 +164,30 @@ public class PharmacyService {
         }
 
         return ResponseEntity.ok(results);
+    }
+
+    public ResponseEntity<List<PharmacyDto>> findProperPharmacies(FindPharmacyRequestDto requestDto) {
+        List<Pharmacy> pharmacies = pharmacyRepository.findPharmaciesByCity(requestDto.getCity());
+        List<Integer> list = requestDto.getMedicationIds();
+        List<PharmacyDto> result = new ArrayList<>();
+
+        for (Pharmacy pharmacy : pharmacies) {
+            List<Integer> tempList = new ArrayList<>(list);
+            List<Stock> tempStock = pharmacy.getStocks();
+
+            for (Stock stock : tempStock) {
+                Medication tempMedication = stock.getMedication();
+
+                if (tempList.contains(tempMedication.getId()) && stock.getQuantity() > 0) {
+                    tempList.remove(Integer.valueOf(tempMedication.getId()));
+                }
+            }
+
+            if (tempList.isEmpty()) {
+                result.add(modelMapperService.forResponse().map(pharmacy, PharmacyDto.class));
+            }
+        }
+
+        return ResponseEntity.ok(result);
     }
 }

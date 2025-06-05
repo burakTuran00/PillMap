@@ -1,5 +1,7 @@
 package project.PillMap.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -32,6 +34,7 @@ public class Pharmacy {
     private boolean onDuty;
 
     @OneToMany(mappedBy = "pharmacy")
+    @JsonBackReference
     private List<Stock> stocks;
 
     //region Constructors
