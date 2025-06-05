@@ -168,11 +168,10 @@ public class PharmacyService {
 
     public ResponseEntity<List<PharmacyDto>> findProperPharmacies(FindPharmacyRequestDto requestDto) {
         List<Pharmacy> pharmacies = pharmacyRepository.findPharmaciesByCity(requestDto.getCity());
-        List<Integer> list = requestDto.getMedicationIds();
         List<PharmacyDto> result = new ArrayList<>();
 
         for (Pharmacy pharmacy : pharmacies) {
-            List<Integer> tempList = new ArrayList<>(list);
+            List<Integer> tempList = new ArrayList<>(requestDto.getMedicationIds());
             List<Stock> tempStock = pharmacy.getStocks();
 
             for (Stock stock : tempStock) {
